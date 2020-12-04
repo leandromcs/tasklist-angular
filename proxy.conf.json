@@ -1,0 +1,10 @@
+{
+  "/task": {
+    "target": "https://leandro-tasklist-api.herokuapp.com",
+    "secure": true,
+    "pathRewrite": {
+    "^/task": ""
+  },
+    "changeOrigin": true
+  }
+}

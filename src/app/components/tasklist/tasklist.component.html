@@ -1,0 +1,67 @@
+<div cdkDropListGroup>
+  <div class="example-container">
+    <h2>To do</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="todoTasks"
+      class="example-list"
+      (cdkDropListDropped)="dropTodo($event)">
+      <div class="example-box" *ngFor="let task of todoTasks" cdkDrag>
+        <div (click)="openDialog(task)">
+          {{task.titulo}}
+        </div>
+        <div style="align-items: flex-end;">
+          <mat-icon style="margin-right: 15px;" (click)="fillForm(task)">create</mat-icon>
+          <mat-icon (click)="deleteTask(task)">delete</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Done</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="doneTasks"
+      class="example-list"
+      (cdkDropListDropped)="dropDone($event)">
+      <div class="example-box" *ngFor="let task of doneTasks" cdkDrag>
+        <div (click)="openDialog(task)">
+          {{task.titulo}}
+        </div>
+        <div style="align-items: flex-end;">
+          <mat-icon style="margin-right: 15px;" (click)="fillForm(task)">create</mat-icon>
+          <mat-icon (click)="deleteTask(task)">delete</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h1>Add New Task</h1>
+
+<mat-grid-list cols=3 rowHeight="100px">
+  <form [formGroup]="taskForm" style="margin-bottom: 20px;" (ngSubmit)="onSubmit()">
+      <mat-grid-tile>
+        <mat-form-field style="margin-right: 15px;" class="example-form-field">
+          <mat-label>Title *</mat-label>
+          <input matInput type="text" formControlName="titulo" style="margin-right: 15px;">
+          <button mat-button *ngIf="taskForm.get('titulo')?.value" matSuffix mat-icon-button aria-label="Clear" (click)="taskForm.get('titulo')?.setValue('')">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field style="margin-right: 15px;" class="example-form-field">
+          <mat-label>Description</mat-label>
+          <textarea matInput rows="1" placeholder="Description" formControlName="descricao"></textarea>
+        </mat-form-field>
+
+        <button type="submit" *ngIf="isNewButtonVisible" [disabled]="!taskForm.valid" mat-raised-button color="primary">New Task</button>
+        <button *ngIf="isEditButtonVisible" [disabled]="!taskForm.valid" mat-raised-button color="primary">Edit Task</button>
+      </mat-grid-tile>
+  </form>
+</mat-grid-list>
+
+<button mat-raised-button color="secondary" *ngIf="isEditButtonVisible" (click)="cancelEdit()">Cancel Edit</button>

@@ -47,7 +47,7 @@
       <mat-grid-tile>
         <mat-form-field style="margin-right: 15px;" class="example-form-field">
           <mat-label>Title *</mat-label>
-          <input matInput type="text" formControlName="titulo" style="margin-right: 15px;">
+          <input matInput type="text" maxlength="128" formControlName="titulo" style="margin-right: 15px;">
           <button mat-button *ngIf="taskForm.get('titulo')?.value" matSuffix mat-icon-button aria-label="Clear" (click)="taskForm.get('titulo')?.setValue('')">
             <mat-icon>close</mat-icon>
           </button>
@@ -55,7 +55,7 @@
 
         <mat-form-field style="margin-right: 15px;" class="example-form-field">
           <mat-label>Description</mat-label>
-          <textarea matInput rows="1" placeholder="Description" formControlName="descricao"></textarea>
+          <textarea matInput rows="1" maxlength="255" placeholder="Description" formControlName="descricao"></textarea>
         </mat-form-field>
 
         <button type="submit" *ngIf="isNewButtonVisible" [disabled]="!taskForm.valid" mat-raised-button color="primary">New Task</button>

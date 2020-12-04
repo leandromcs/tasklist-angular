@@ -9,7 +9,7 @@ const httpOptions = {
    })
 }
 
-const url = 'http://leandro-tasklist-api.herokuapp.com/task'
+const url = 'https://leandro-tasklist-api.herokuapp.com/task'
 
 @Injectable({
   providedIn: 'root'
